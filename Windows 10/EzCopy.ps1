@@ -76,7 +76,6 @@ $exportButton.Add_Click({ handleExportButtonClick })
 $importCopyButton.Add_Click({ handleImportCopyButtonClick })
 $exportCopyButton.Add_Click({ handleExportCopyButtonClick })
 
-#Requires -RunAsAdministrator
 
 $mainWinForm.FormBorderStyle = "Fixed3D"
 $mainWinForm.MaximizeBox = $False

@@ -78,7 +78,6 @@ $Button6.Add_Click({ handleButton6Click })
 $Button7.Add_Click({ handleButton7Click })
 $Button8.Add_Click({ handleButton8Click })
 
-#Requires -RunAsAdministrator
 
 $mainWinForm.FormBorderStyle = "Fixed3D"
 $mainWinForm.MaximizeBox = $False

@@ -204,7 +204,6 @@ $softwareGroupBox.controls.AddRange(@($CheckBox1,$CheckBox2,$CheckBox3,$CheckBox
 
 $goButton.Add_Click({ handleGoButtonClick })
 
-#Requires -RunAsAdministrator
 
 $mainWinForm.FormBorderStyle = "Fixed3D"
 $mainWinForm.MaximizeBox = $False
@@ -279,7 +278,8 @@ function handleGoButtonClick {
 
 function 7zip {
     try {
-        $path = "$env:temp\7zipSetup.exe"
+        Write-Host "`n==========================`n7zip is installing`n=========================="
+        $path = "$env:temp\EzSoftware\7zipSetup.exe"
         $url = "https://www.7-zip.org/a/7z2002-x64.exe"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/S"
@@ -291,7 +291,8 @@ function 7zip {
 
 function Chrome {
     try {
-        $path = "$env:temp\ChromeSetup.exe"
+        Write-Host "`n==========================`nChrome is installing`n=========================="
+        $path = "$env:temp\EzSoftware\ChromeSetup.exe"
         $url = "http://dl.google.com/chrome/install/375.126/chrome_installer.exe"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/silent /install"
@@ -303,7 +304,8 @@ function Chrome {
 
 function Discord {
     try {
-        $path = "$env:temp\DiscordSetup.exe"
+        Write-Host "`n==========================`nDiscord is installing`n=========================="
+        $path = "$env:temp\EzSoftware\DiscordSetup.exe"
         $url = "https://discord.com/api/download?platform=win"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/S"
@@ -315,7 +317,8 @@ function Discord {
 
 function EqualizerAPO {
     try {
-        $path = "$env:temp\EqualizerAPOSetup.exe"
+        Write-Host "`n==========================`nEqualizer APO is installing`n=========================="
+        $path = "$env:temp\EzSoftware\EqualizerAPOSetup.exe"
         $url = "https://sourceforge.net/projects/equalizerapo/files/latest/download"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path
@@ -327,7 +330,8 @@ function EqualizerAPO {
 
 function Firefox {
     try {
-        $path = "$env:temp\FirefoxSetup.exe"
+        Write-Host "`n==========================`nFirefox is installing`n=========================="
+        $path = "$env:temp\EzSoftware\FirefoxSetup.exe"
         $url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/S"
@@ -339,7 +343,8 @@ function Firefox {
 
 function Git {
     try {
-        $path = "$env:temp\GitSetup.exe"
+        Write-Host "`n==========================`nGit is installing`n=========================="
+        $path = "$env:temp\EzSoftware\GitSetup.exe"
         $url = "https://git-scm.com/download/win"
         $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         $url = ($response.links | Where-Object outerHTML -Match "git-.*-64-bit.exe" | Select-Object -first 1 * ).href
@@ -353,7 +358,8 @@ function Git {
 
 function GitHubDestkop {
     try {
-        $path = "$env:temp\GitHubDestkopSetup.exe"
+        Write-Host "`n==========================`nGitHub Desktop is installing`n=========================="
+        $path = "$env:temp\EzSoftware\GitHubDestkopSetup.exe"
         $url = "https://central.github.com/deployments/desktop/desktop/latest/win32"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/S"
@@ -364,7 +370,8 @@ function GitHubDestkop {
 }
 function JavaJRE {
     try {
-        $path = "$env:temp\JavaJRESetup.exe"
+        Write-Host "`n==========================`nJava JRE is installing`n=========================="
+        $path = "$env:temp\EzSoftware\JavaJRESetup.exe"
         $url = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=243737_61ae65e088624f5aaa0b1d2d801acb16"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/s REBOOT=0 SPONSORS=0 AUTO_UPDATE=0"
@@ -376,7 +383,8 @@ function JavaJRE {
 
 function LittleBigMouse {
     try {
-        $path = "$env:temp\LittleBigMouseSetup.exe"
+        Write-Host "`n==========================`nLittleBigMouse is installing`n=========================="
+        $path = "$env:temp\EzSoftware\LittleBigMouseSetup.exe"
         $url = "https://api.github.com/repos/mgth/LittleBigMouse/releases"
         $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome | ConvertFrom-Json
         $url = ($response[0].assets | Where-Object Name -Like "LittleBigMouse_*.exe" | Select-Object -first 1 * ).browser_download_url
@@ -390,8 +398,9 @@ function LittleBigMouse {
 
 function NVM {
     try {
-        $zip_path = "$env:temp\NVMSetup.zip"
-        $unzip_path = "$env:temp\NVMSetup"
+        Write-Host "`n==========================`nNVM is installing`n=========================="
+        $zip_path = "$env:temp\EzSoftware\NVMSetup.zip"
+        $unzip_path = "$env:temp\EzSoftware\NVMSetup"
         $url = "https://api.github.com/repos/coreybutler/nvm-windows/releases/latest"
         $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome | ConvertFrom-Json
         $url = ($response.assets | Where-Object Name -Match "nvm-setup.zip" | Select-Object -first 1 * ).browser_download_url
@@ -407,7 +416,8 @@ function NVM {
 
 function NotepadPlusPlus {
     try {
-        $path = "$env:temp\NotepadPlusPlusSetup.exe"
+        Write-Host "`n==========================`nNotepad++ is installing`n=========================="
+        $path = "$env:temp\EzSoftware\NotepadPlusPlusSetup.exe"
         $url = "https://api.github.com/repos/notepad-plus-plus/notepad-plus-plus/releases/latest"
         $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome | ConvertFrom-Json
         $url = ($response.assets | Where-Object Name -Match "npp.*.Installer.x64.exe" | Select-Object -first 1 * ).browser_download_url
@@ -421,7 +431,8 @@ function NotepadPlusPlus {
 
 function PotPlayer {
     try {
-        $path = "$env:temp\PotPlayerSetup.exe"
+        Write-Host "`n==========================`nPotPlayer is installing`n=========================="
+        $path = "$env:temp\EzSoftware\PotPlayerSetup.exe"
         $url = "https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup64.exe"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/S"
@@ -433,7 +444,8 @@ function PotPlayer {
 
 function Python {
     try {
-        $path = "$env:temp\PythonSetup.exe"
+        Write-Host "`n==========================`nPython is installing`n=========================="
+        $path = "$env:temp\EzSoftware\PythonSetup.exe"
         $url = "https://www.python.org/ftp/python/"
         $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         $url += $response.links.href[$response.links.href.length - 24]
@@ -449,7 +461,8 @@ function Python {
 
 function RazerSynapse2 {
     try {
-        $path = "$env:temp\RazerSynapse2Setup.exe"
+        Write-Host "`n==========================`nRazer Syanpse 2 is installing`n=========================="
+        $path = "$env:temp\EzSoftware\RazerSynapse2Setup.exe"
         $url = "http://rzr.to/synapse-pc-download"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/S"
@@ -461,7 +474,8 @@ function RazerSynapse2 {
 
 function RazerSynapse3 {
     try {
-        $path = "$env:temp\RazerSynapse3Setup.exe"
+        Write-Host "`n==========================`nRazer Synapse 3 is installing`n=========================="
+        $path = "$env:temp\EzSoftware\RazerSynapse3Setup.exe"
         $url = "http://rzr.to/synapse-3-pc-download"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/S"
@@ -473,16 +487,17 @@ function RazerSynapse3 {
 
 function Rclone {
     try {
-        $zip_path = "$env:temp\RcloneSetup.zip"
+        Write-Host "`n==========================`nRclone is installing`n=========================="
+        $zip_path = "$env:temp\EzSoftware\RcloneSetup.zip"
         $rclone_path = "$env:ProgramFiles"
         $url = "https://api.github.com/repos/rclone/rclone/releases/latest"
         $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome | ConvertFrom-Json
         $url = ($response.assets | Where-Object Name -Like "rclone-*-windows-amd64.zip" | Select-Object -first 1 * ).browser_download_url
         Invoke-WebRequest -Uri $url -OutFile $zip_path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
-        Expand-Archive -Path $zip_path -DestinationPath "$env:temp" -Force
-        $unzip_path = "$env:temp\$(Get-ChildItem -Path "$env:temp" | Where-Object Name -Like 'rclone-*')"
+        Expand-Archive -Path $zip_path -DestinationPath "$env:temp\EzSoftware" -Force
+        $unzip_path = "$env:temp\EzSoftware\$(Get-ChildItem -Path "$env:temp\EzSoftware" | Where-Object Name -Like 'rclone-*')"
         Rename-Item -Path $unzip_path -NewName "Rclone" -Force
-        $unzip_path = "$env:temp\Rclone"
+        $unzip_path = "$env:temp\EzSoftware\Rclone"
         Move-Item -Path $unzip_path -Destination $rclone_path -Force
         $rclone_path += "\Rclone"
         $old_path = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
@@ -497,7 +512,8 @@ function Rclone {
 
 function Spotify {
     try {
-        $path = "$env:temp\SpotifySetup.exe"
+        Write-Host "`n==========================`nSpotify is installing`n=========================="
+        $path = "$env:temp\EzSoftware\SpotifySetup.exe"
         $url = "https://download.scdn.co/SpotifySetup.exe"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/S"
@@ -509,7 +525,8 @@ function Spotify {
 
 function VLC {
     try {
-        $path = "$env:temp\VLCSetup.exe"
+        Write-Host "`n==========================`nVLC is installing`n=========================="
+        $path = "$env:temp\EzSoftware\VLCSetup.exe"
         $url = "https://www.videolan.org/vlc"
         $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         $url = "https:$(($response.links | Where-Object outerHTML -Match "vlc-.*-win64.exe" | Select-Object -first 1 * ).href)"
@@ -523,7 +540,8 @@ function VLC {
 
 function VSCode {
     try {
-        $path = "$env:temp\VSCodeSetup.exe"
+        Write-Host "`n==========================`nVS Code is installing`n=========================="
+        $path = "$env:temp\EzSoftware\VSCodeSetup.exe"
         $url = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/VERYSILENT /MERGETASKS=!runcode"
@@ -535,11 +553,12 @@ function VSCode {
 
 function Winaero {
     try {
-        $path = "$env:temp\WinaeroSetup.zip"
+        Write-Host "`n==========================`nWinaero is installing`n=========================="
+        $path = "$env:temp\EzSoftware\WinaeroSetup.zip"
         $url = "https://winaero.com/downloads/winaerotweaker.zip"
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
-        Expand-Archive -Path $path -DestinationPath "$env:temp" -Force
-        $path = "$env:temp\$(Get-ChildItem -Path "$env:temp" | Where-Object Name -Like "WinaeroTweaker-*-setup.exe")"
+        Expand-Archive -Path $path -DestinationPath "$env:temp\EzSoftware" -Force
+        $path = "$env:temp\EzSoftware\$(Get-ChildItem -Path "$env:temp\EzSoftware" | Where-Object Name -Like "WinaeroTweaker-*-setup.exe")"
         Write-Host $path
         Start-Process -FilePath $path -ArgumentList "/SP- /VERYSILENT"
     }
@@ -550,9 +569,11 @@ function Winaero {
 
 function WinFsp {
     try {
-        $path = "$env:temp\WinFspSetup.msi"
+        Write-Host "`n==========================`nWinFsp is installing`n=========================="
+        $path = "$env:temp\EzSoftware\WinFspSetup.msi"
         $url = "https://api.github.com/repos/billziss-gh/winfsp/releases/latest"
-        $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome | ConvertFrom-Json
+        $session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+        $response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome -WebSession $session | ConvertFrom-Json
         $url = ($response.assets | Where-Object Name -Like "winfsp-*.msi" | Select-Object -first 1 * ).browser_download_url
         Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
         Start-Process -FilePath $path -ArgumentList "/quiet"
