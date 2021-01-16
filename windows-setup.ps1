@@ -24,6 +24,7 @@ choco install googlechrome -y
 choco install notepadplusplus -y
 choco install python3 -y
 choco install nvm -y
+choco install equalizerapo -y
 choco install littlebigmouse -y
 choco install vscode -y
 choco install git -y --params "/NoShellIntegration"
