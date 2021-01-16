@@ -7,10 +7,13 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     }
 }
 
+# Set theme
+Get-ChildItem -Path ".\" -Filter "*.deskthemepack" | ForEach-Object { Start-Process $_.FullName }
+
 # Uninstall Bloatware
 [regex]$WhitelistedApps = "Microsoft.Paint3D|Microsoft.WindowsCalculator|Microsoft.WindowsStore|Microsoft.Windows.Photos|CanonicalGroupLimited.UbuntuonWindows|Microsoft.XboxGameCallableUI|Microsoft.XboxGamingOverlay|Microsoft.Xbox.TCUI|Microsoft.XboxGamingOverlay|Microsoft.XboxIdentityProvider|Microsoft.MSPaint|Microsoft.WindowsTerminal*"
-Get-AppxPackage -AllUsers | Where-Object {$_.Name -NotMatch $WhitelistedApps} | Remove-AppxPackage
-Get-AppxProvisionedPackage -Online | Where-Object {$_.PackageName -NotMatch $WhitelistedApps} | Remove-AppxProvisionedPackage -Online
+Get-AppxPackage -AllUsers | Where-Object { $_.Name -NotMatch $WhitelistedApps } | Remove-AppxPackage
+Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -NotMatch $WhitelistedApps } | Remove-AppxProvisionedPackage -Online
 
 # Install Chocolatey
 Invoke-WebRequest -UseBasicParsing "https://chocolatey.org/install.ps1" | Invoke-Expression
@@ -48,10 +51,23 @@ RefreshEnv.cmd
 Copy-Item -Path ".\BACKUP\*" -Destination "$env:SystemDrive\" -Recurse -Force -PassThru -ErrorAction Continue
 
 # Import Registry files in '.\REG' folder
-foreach ($reg in (Get-ChildItem -Path ".\REG" -Filter "*.reg").FullName) {
+foreach ($reg in (Get-ChildItem -Path ".\REG\*" -Include @("*.reg")).FullName) {
     reg.exe import $reg
 }
 
 # Add Windows Terminal to context menu
 pwsh -c "Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/lextm/windowsterminal-shell/master/install.ps1" | Invoke-Expression"
 RefreshEnv.cmd
+
+# Run other external scripts in '.\SCRIPTS' folder
+foreach ($script in (Get-ChildItem -Path ".\SCRIPTS\*" -Include @("*.bat")).FullName) {
+    #cmd.exe "/c", $script
+}
+foreach ($script in (Get-ChildItem -Path ".\SCRIPTS\*" -Include @("*.ps1")).FullName) {
+    powershell.exe $script
+}
+foreach ($script in (Get-ChildItem -Path ".\SCRIPTS\*" -Include @("*.sh"))) {
+    Set-Location (Split-Path -Path $script.FullName -Parent)
+    bash.exe $script.Name
+}
+    
