@@ -45,7 +45,12 @@ nvm install latest
 RefreshEnv.cmd
 
 # Copy items from local '.\BACKUP' folder to the system drive (e.g. C:\ drive)
-Copy-Item -Path .\BACKUP\* -Destination "$env:SystemDrive\" -Recurse -Force -PassThru -ErrorAction Continue
+Copy-Item -Path ".\BACKUP\*" -Destination "$env:SystemDrive\" -Recurse -Force -PassThru -ErrorAction Continue
+
+# Import Registry files in '.\REG' folder
+foreach ($reg in (Get-ChildItem -Path ".\REG" -Filter "*.reg").FullName) {
+    reg.exe import $reg
+}
 
 # Add Windows Terminal to context menu
 pwsh -c "Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/lextm/windowsterminal-shell/master/install.ps1" | Invoke-Expression"
