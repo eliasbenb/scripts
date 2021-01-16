@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>littlebigmouse</id>
+    <version>4.2.7124.42685</version>
+    <title>Little Big Mouse</title>
+    <owners>eliasbenb</owners>
+    <authors>MgTH, Mathieu GRENET</authors>
+    <licenseUrl>https://github.com/mgth/LittleBigMouse/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mgth/LittleBigMouse/</projectUrl>
+    <projectSourceUrl>https://github.com/mgth/LittleBigMouse/</projectSourceUrl>
+    <docsUrl>https://github.com/mgth/LittleBigMouse/blob/master/README.md</docsUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description><![CDATA[DPI Aware mouse move across screens]]></description>
+    <summary>DPI Aware mouse move across screens</summary>
+    <iconUrl>https://raw.githubusercontent.com/mgth/LittleBigMouse/master/LittleBigMouse/Control.Loader/img/Icons/lbm_logo.svg</iconUrl>
+    <copyright>GNU General Public License v3.0</copyright>
+    <language>en-US</language>
+    <tags>Little-Big-Mouse, mouse, dpi, desktop, windows</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
