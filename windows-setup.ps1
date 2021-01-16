@@ -24,6 +24,7 @@ choco install googlechrome -y
 choco install notepadplusplus -y
 choco install python3 -y
 choco install nvm -y
+choco install littlebigmouse -y
 choco install vscode -y
 choco install git -y --params "/NoShellIntegration"
 choco install discord -y
@@ -41,14 +42,6 @@ RefreshEnv.cmd
 # Install latest NVM
 nvm install latest
 RefreshEnv.cmd
-
-# Install latest Little Big Mouse
-$path = "$env:temp\LittleBigMouseSetup.exe"
-$url = "https://api.github.com/repos/mgth/LittleBigMouse/releases"
-$response = Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome | ConvertFrom-Json
-$url = ($response[0].assets | Where-Object Name -Like "LittleBigMouse_*.exe" | Select-Object -first 1 * ).browser_download_url
-Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
-Start-Process -FilePath $path -ArgumentList "/VERYSILENT"
 
 # Copy items from local '.\BACKUP' folder to the system drive (e.g. C:\ drive)
 Copy-Item -Path .\BACKUP\* -Destination "$env:SystemDrive\" -Recurse -Force -PassThru -ErrorAction Continue
