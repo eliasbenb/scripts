@@ -41,6 +41,10 @@ choco install spotify -y
 choco install spicetify-cli -y
 choco install rclone -y
 choco install winfsp -y
+choco install wsl2 --params "/Version:2 /Retry:true" -y
+choco install wsl-ubuntu-2004 --params "/InstallRoot:true" -y
+choco install docker-desktop -y
+
 RefreshEnv.cmd
 
 # Install latest NVM
@@ -70,4 +74,3 @@ foreach ($script in (Get-ChildItem -Path ".\SCRIPTS\*" -Include @("*.sh"))) {
     Set-Location (Split-Path -Path $script.FullName -Parent)
     bash.exe $script.Name
 }
-    
