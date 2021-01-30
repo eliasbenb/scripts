@@ -11,7 +11,7 @@ if ($type -eq "b") {
     }
 } elseif ($type -eq "r") {
     Set-Location "$PSScriptRoot"
-    Robocopy.exe "./BACKUP" $env:SystemDrive
+    Robocopy.exe "./BACKUP" $env:SystemDrive /E
 }
 
 Set-Location "$PSScriptRoot"
