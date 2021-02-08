@@ -37,7 +37,7 @@ choco install razer-synapse-2 -y
 choco install microsoft-windows-terminal -y
 choco install spotify -y
 choco install spicetify-cli -y
-choco install office365business --params="/productid:O365ProPlusRetail" /exclude:"Access Groove Lync OneDrive OneNote Outlook"
+choco install office365business --params="/productid:O365ProPlusRetail" /exclude:"Access Groove Lync OneDrive OneNote Outlook" -y
 choco install wsl2 --params "/Version:2 /Retry:true" -y
 choco install wsl-ubuntu-2004 --params "/InstallRoot:true" -y
 
