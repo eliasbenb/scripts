@@ -21,9 +21,6 @@ RefreshEnv.cmd
 
 # Install Chocolatey Packages
 choco install chocolateygui -y
-choco install googlechrome -y
-choco install powershell-core -y
-choco install googlechrome -y
 choco install notepadplusplus -y
 choco install python3 -y
 choco install nvm -y
@@ -31,6 +28,7 @@ choco install equalizerapo -y
 choco install littlebigmouse --version=4.2.7124.42685 -y
 choco install vscode -y
 choco install git -y --params "/NoShellIntegration"
+choco install google-drive-file-stream -y
 choco install discord -y
 choco install potplayer -y
 choco install expressvpn -y
@@ -39,11 +37,9 @@ choco install razer-synapse-2 -y
 choco install microsoft-windows-terminal -y
 choco install spotify -y
 choco install spicetify-cli -y
-choco install rclone -y
-choco install winfsp -y
+choco install office365business --params="/productid:O365ProPlusRetail" /exclude:"Access Groove Lync OneDrive OneNote Outlook"
 choco install wsl2 --params "/Version:2 /Retry:true" -y
 choco install wsl-ubuntu-2004 --params "/InstallRoot:true" -y
-choco install docker-desktop -y
 
 RefreshEnv.cmd
 
@@ -59,13 +55,9 @@ foreach ($reg in (Get-ChildItem -Path ".\REG\*" -Include @("*.reg")).FullName) {
     reg.exe import $reg
 }
 
-# Add Windows Terminal to context menu
-pwsh -c "Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/lextm/windowsterminal-shell/master/install.ps1" | Invoke-Expression"
-RefreshEnv.cmd
-
 # Run other external scripts in '.\SCRIPTS' folder
 foreach ($script in (Get-ChildItem -Path ".\SCRIPTS\*" -Include @("*.bat")).FullName) {
-    #cmd.exe "/c", $script
+    cmd.exe "/c", $script
 }
 foreach ($script in (Get-ChildItem -Path ".\SCRIPTS\*" -Include @("*.ps1")).FullName) {
     powershell.exe $script
