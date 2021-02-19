@@ -25,7 +25,7 @@ choco install notepadplusplus -y
 choco install python3 -y
 choco install nvm -y
 choco install equalizerapo -y
-choco install littlebigmouse --version=4.2.7124.42685 -y
+choco install littlebigmouse -y
 choco install vscode -y
 choco install git -y --params "/NoShellIntegration"
 choco install google-drive-file-stream -y
@@ -33,6 +33,7 @@ choco install discord -y
 choco install potplayer -y
 choco install expressvpn -y
 choco install github-desktop -y
+choco install renamemytvseries2 -y
 choco install razer-synapse-2 -y
 choco install microsoft-windows-terminal -y
 choco install spotify -y
